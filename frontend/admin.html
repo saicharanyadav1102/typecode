@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel — typeCode</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <style>
+    .admin-tabs { margin-bottom: var(--space-6); justify-content: center; }
+    .admin-section { display: none; }
+    .admin-section.active { display: block; }
+    .admin-stat { padding: var(--space-4) var(--space-5); }
+    .admin-form { max-width: 600px; }
+    .content-item { display: flex; justify-content: space-between; align-items: center; padding: var(--space-3) 0; border-bottom: 1px solid var(--border-subtle); }
+    .content-item:last-child { border-bottom: none; }
+    .content-preview { max-width: 400px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: var(--font-size-sm); color: var(--text-secondary); }
+    .content-actions { display: flex; gap: var(--space-2); }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="app-navbar">
+    <a href="index.html" class="app-navbar-logo">type<span>Code</span></a>
+    <div class="app-navbar-nav">
+      <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
+      <a href="admin.html" class="nav-link active">🔧 Admin</a>
+    </div>
+    <div class="app-navbar-actions">
+      <button class="theme-toggle" aria-label="Toggle theme">☀️</button>
+      <a href="profile.html" class="user-avatar" title="Profile">A</a>
+      <button class="mobile-menu-btn" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+
+  <div class="page">
+    <div class="page-content">
+
+      <div class="page-header">
+        <h1 class="page-title">🔧 Admin Panel</h1>
+        <p class="page-subtitle">Manage users, content, and view analytics.</p>
+      </div>
+
+      <!-- Admin Tabs -->
+      <div class="tabs admin-tabs" id="admin-tabs">
+        <button class="tab active" data-section="analytics">📊 Analytics</button>
+        <button class="tab" data-section="users">👥 Users</button>
+        <button class="tab" data-section="texts">📝 Texts</button>
+        <button class="tab" data-section="snippets">💻 Snippets</button>
+      </div>
+
+      <!-- Analytics Section -->
+      <div class="admin-section active" id="section-analytics">
+        <div class="dashboard-stats">
+          <div class="card admin-stat stat-card">
+            <div class="stat-value" id="admin-total-users">—</div>
+            <div class="stat-label">Total Users</div>
+          </div>
+          <div class="card admin-stat stat-card">
+            <div class="stat-value" id="admin-new-users">—</div>
+            <div class="stat-label">New This Week</div>
+          </div>
+          <div class="card admin-stat stat-card">
+            <div class="stat-value" id="admin-total-tests">—</div>
+            <div class="stat-label">Total Tests</div>
+          </div>
+          <div class="card admin-stat stat-card">
+            <div class="stat-value" id="admin-avg-wpm">—</div>
+            <div class="stat-label">Avg WPM</div>
+          </div>
+          <div class="card admin-stat stat-card">
+            <div class="stat-value" id="admin-tests-week">—</div>
+            <div class="stat-label">Tests This Week</div>
+          </div>
+          <div class="card admin-stat stat-card">
+            <div class="stat-value" id="admin-total-content">—</div>
+            <div class="stat-label">Total Content</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Users Section -->
+      <div class="admin-section" id="section-users">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">User Management</h3>
+            <input class="form-input" type="text" id="user-search" placeholder="Search users..." style="max-width:240px;">
+          </div>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr><th>ID</th><th>Username</th><th>Email</th><th>Role</th><th>Status</th><th>Actions</th></tr>
+              </thead>
+              <tbody id="users-table-body">
+                <tr><td colspan="6" class="text-center text-muted" style="padding:var(--space-8);">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Texts Section -->
+      <div class="admin-section" id="section-texts">
+        <div class="card" style="margin-bottom:var(--space-6);">
+          <h3 class="card-title" style="margin-bottom:var(--space-4);">Add New Text</h3>
+          <form id="add-text-form" class="admin-form" novalidate>
+            <div class="form-group">
+              <label class="form-label">Content</label>
+              <textarea class="form-input form-textarea" id="text-content" rows="4" placeholder="Enter typing text..."></textarea>
+            </div>
+            <div class="form-group" style="display:flex;gap:var(--space-4);">
+              <div style="flex:1;">
+                <label class="form-label">Difficulty</label>
+                <select class="form-input form-select" id="text-difficulty">
+                  <option value="beginner">Beginner</option>
+                  <option value="intermediate" selected>Intermediate</option>
+                  <option value="advanced">Advanced</option>
+                </select>
+              </div>
+              <div style="flex:1;">
+                <label class="form-label">Category</label>
+                <input class="form-input" type="text" id="text-category" value="general">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Text</button>
+          </form>
+        </div>
+        <div class="card">
+          <h3 class="card-title" style="margin-bottom:var(--space-4);">Existing Texts</h3>
+          <div id="texts-list"><p class="text-muted">Loading...</p></div>
+        </div>
+      </div>
+
+      <!-- Snippets Section -->
+      <div class="admin-section" id="section-snippets">
+        <div class="card" style="margin-bottom:var(--space-6);">
+          <h3 class="card-title" style="margin-bottom:var(--space-4);">Add Code Snippet</h3>
+          <form id="add-snippet-form" class="admin-form" novalidate>
+            <div class="form-group">
+              <label class="form-label">Title</label>
+              <input class="form-input" type="text" id="snippet-title" placeholder="e.g. Binary Search">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Code</label>
+              <textarea class="form-input form-textarea" id="snippet-content" rows="6" placeholder="Paste code here..." style="font-family:var(--font-mono);"></textarea>
+            </div>
+            <div class="form-group" style="display:flex;gap:var(--space-4);">
+              <div style="flex:1;">
+                <label class="form-label">Language</label>
+                <select class="form-input form-select" id="snippet-language">
+                  <option value="python">Python</option>
+                  <option value="javascript">JavaScript</option>
+                  <option value="java">Java</option>
+                  <option value="c">C</option>
+                  <option value="cpp">C++</option>
+                  <option value="html">HTML</option>
+                  <option value="css">CSS</option>
+                  <option value="sql">SQL</option>
+                </select>
+              </div>
+              <div style="flex:1;">
+                <label class="form-label">Difficulty</label>
+                <select class="form-input form-select" id="snippet-difficulty">
+                  <option value="beginner">Beginner</option>
+                  <option value="intermediate" selected>Intermediate</option>
+                  <option value="advanced">Advanced</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Snippet</button>
+          </form>
+        </div>
+        <div class="card">
+          <h3 class="card-title" style="margin-bottom:var(--space-4);">Existing Snippets</h3>
+          <div id="snippets-list"><p class="text-muted">Loading...</p></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

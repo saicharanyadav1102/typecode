@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>typeCode — Improve Typing Speed. Master Coding Accuracy.</title>
+  <meta name="description" content="typeCode is a professional typing practice platform for programmers and everyday typists.">
+
+  <!-- Google Fonts: Inconsolata (mono) + Inter (UI) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/intro.css">
+  <link rel="stylesheet" href="css/landing.css">
+</head>
+<body>
+
+  <!-- ========================================== -->
+  <!-- CINEMATIC INTRO OVERLAY                    -->
+  <!-- Covers full screen, pure black, auto-plays -->
+  <!-- ========================================== -->
+  <div id="intro-overlay" aria-hidden="true">
+    <!-- Centered typing area -->
+    <div id="typing-container">
+      <span id="typed-text"></span><span id="cursor"></span>
+    </div>
+    <!-- White dot that expands into tunnel flash -->
+    <div id="white-dot"></div>
+    <!-- Beginner-Friendly Hint: Shows users how to skip if they don't want to wait -->
+    <div id="skip-intro-hint">Click or press any key to skip &bull; ESC</div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MAIN WEBSITE (hidden until intro finishes) -->
+  <!-- ========================================== -->
+  <main id="main-website" class="hidden">
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-logo">type<span>Code</span></div>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="login.html" class="nav-cta" id="nav-get-started">Get Started</a>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <div class="hero-content">
+        <div class="hero-badge reveal-item">⚡ Free &amp; Open Source</div>
+        <h1 class="hero-title reveal-item">
+          type<span class="accent">Code</span>
+        </h1>
+        <p class="hero-tagline reveal-item">
+          Improve typing speed. Master coding accuracy.
+        </p>
+        <div class="hero-buttons reveal-item">
+          <button class="btn btn-primary" id="btn-start-typing" onclick="window.location.href='typing.html'">
+            <span class="btn-icon">⌨</span> Start Typing
+          </button>
+          <button class="btn btn-secondary" id="btn-coding-mode" onclick="window.location.href='code-typing.html'">
+            <span class="btn-icon">&lt;/&gt;</span> Coding Mode
+          </button>
+        </div>
+        <div class="hero-stats reveal-item">
+          <div class="stat">
+            <span class="stat-number">8</span>
+            <span class="stat-label">Languages</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-number">∞</span>
+            <span class="stat-label">Practice</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-number">0</span>
+            <span class="stat-label">Cost</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating decorative code block -->
+      <div class="hero-decoration reveal-item">
+        <div class="floating-code">
+          <span class="code-line"><i class="kw">const</i> speed = <i class="fn">calculate</i>(wpm);</span>
+          <span class="code-line"><i class="kw">if</i> (accuracy &gt; <i class="num">95</i>) {</span>
+          <span class="code-line">&nbsp;&nbsp;<i class="kw">return</i> <i class="str">"excellent"</i>;</span>
+          <span class="code-line">}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+      <div class="features-grid">
+        <div class="feature-card reveal-item">
+          <div class="feature-icon">🎯</div>
+          <h3>Precision Tracking</h3>
+          <p>Real-time WPM, CPM, and accuracy metrics with per-key error analysis and keyboard heatmap.</p>
+        </div>
+        <div class="feature-card reveal-item">
+          <div class="feature-icon">💻</div>
+          <h3>Code Practice</h3>
+          <p>Type real code in Python, JavaScript, Java, C, C++, HTML, CSS, and SQL.</p>
+        </div>
+        <div class="feature-card reveal-item">
+          <div class="feature-icon">📊</div>
+          <h3>Smart Progress</h3>
+          <p>Track your improvement over time. Your weak keys are highlighted so you know exactly what to practice.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Built with precision. &copy; 2026 typeCode</p>
+    </footer>
+  </main>
+
+  <!-- Animation Controller -->
+  <script src="js/intro.js"></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile — typeCode</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="app-navbar">
+    <a href="index.html" class="app-navbar-logo">type<span>Code</span></a>
+    <div class="app-navbar-nav">
+      <a href="typing.html" class="nav-link">⌨ Typing</a>
+      <a href="code-typing.html" class="nav-link">&lt;/&gt; Code</a>
+      <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
+      <a href="leaderboard.html" class="nav-link">🏆 Leaderboard</a>
+    </div>
+    <div class="app-navbar-actions">
+      <button class="theme-toggle" aria-label="Toggle theme">☀️</button>
+      <div class="nav-user-actions" style="display:flex;align-items:center;gap:0.75rem;">
+        <a href="profile.html" class="user-avatar" title="Profile">U</a>
+      </div>
+      <button class="mobile-menu-btn" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+
+  <div class="page">
+    <div class="page-content page-content-sm">
+
+      <div class="page-header text-center">
+        <h1 class="page-title">👤 Profile</h1>
+      </div>
+
+      <!-- Profile Card -->
+      <div class="card" style="text-align:center;margin-bottom:var(--space-6);">
+        <div class="user-avatar" style="width:72px;height:72px;font-size:2rem;margin:0 auto var(--space-4);" id="profile-avatar">U</div>
+        <h2 style="font-size:var(--font-size-xl);font-weight:700;" id="profile-username">Username</h2>
+        <p class="text-muted" style="font-size:var(--font-size-sm);" id="profile-email">user@example.com</p>
+        <p class="text-muted" style="font-size:var(--font-size-xs);margin-top:var(--space-2);">
+          Member since <span id="profile-joined">—</span>
+        </p>
+      </div>
+
+      <!-- Edit Profile Form -->
+      <div class="card" style="margin-bottom:var(--space-6);">
+        <h3 class="card-title" style="margin-bottom:var(--space-5);">Edit Profile</h3>
+        <form id="profile-form" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="profile-name-input">Username</label>
+            <input class="form-input" type="text" id="profile-name-input" placeholder="Your username">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="profile-bio-input">Bio</label>
+            <textarea class="form-input form-textarea" id="profile-bio-input" placeholder="Tell us about yourself..." rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+      </div>
+
+      <!-- Change Password -->
+      <div class="card">
+        <h3 class="card-title" style="margin-bottom:var(--space-5);">Change Password</h3>
+        <form id="password-form" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="current-password">Current Password</label>
+            <input class="form-input" type="password" id="current-password" placeholder="••••••••">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="new-password">New Password</label>
+            <input class="form-input" type="password" id="new-password" placeholder="Min 6 characters">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="confirm-new-password">Confirm New Password</label>
+            <input class="form-input" type="password" id="confirm-new-password" placeholder="Repeat new password">
+          </div>
+          <button type="submit" class="btn btn-secondary">Update Password</button>
+        </form>
+      </div>
+
+      <!-- Logout -->
+      <div style="text-align:center;margin-top:var(--space-6);">
+        <button class="btn btn-danger" id="profile-logout-btn">🚪 Logout</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/profile.js"></script>
+</body>
+</html>

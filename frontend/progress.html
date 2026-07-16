@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Progress — typeCode</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <style>
+    /* ---- Keyboard Heatmap ---- */
+    .keyboard-heatmap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: var(--space-6);
+    }
+    .kb-row {
+      display: flex;
+      gap: 5px;
+    }
+    .kb-key {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      transition: all 0.3s ease;
+      cursor: default;
+      position: relative;
+    }
+    .kb-key.space { width: 240px; }
+    .kb-key.shift { width: 72px; font-size: var(--font-size-xs); }
+    .kb-key.tab-key, .kb-key.caps-key { width: 60px; font-size: var(--font-size-xs); }
+    .kb-key.enter-key { width: 72px; font-size: var(--font-size-xs); }
+    .kb-key.backspace-key { width: 72px; font-size: var(--font-size-xs); }
+
+    /* Heatmap colors: green (good) -> yellow -> red (bad) */
+    .kb-key.heat-0 { background: rgba(0, 184, 148, 0.15); border-color: rgba(0, 184, 148, 0.3); color: var(--success); }
+    .kb-key.heat-1 { background: rgba(253, 203, 110, 0.15); border-color: rgba(253, 203, 110, 0.3); color: var(--warning); }
+    .kb-key.heat-2 { background: rgba(255, 159, 67, 0.2); border-color: rgba(255, 159, 67, 0.3); color: #ff9f43; }
+    .kb-key.heat-3 { background: rgba(255, 107, 107, 0.2); border-color: rgba(255, 107, 107, 0.3); color: var(--error); }
+    .kb-key.heat-4 { background: rgba(255, 71, 71, 0.3); border-color: rgba(255, 71, 71, 0.4); color: #ff4747; box-shadow: 0 0 12px rgba(255,71,71,0.2); }
+
+    .heatmap-legend {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      justify-content: center;
+      margin-top: var(--space-4);
+      font-size: var(--font-size-xs);
+      color: var(--text-muted);
+    }
+    .legend-swatch {
+      width: 16px; height: 16px;
+      border-radius: 3px;
+    }
+    .legend-item { display: flex; align-items: center; gap: 4px; }
+
+    /* History table */
+    .history-table td, .history-table th {
+      padding: var(--space-3) var(--space-4);
+    }
+
+    @media (max-width: 768px) {
+      .kb-key { width: 32px; height: 32px; font-size: var(--font-size-xs); }
+      .kb-key.space { width: 160px; }
+      .kb-key.shift, .kb-key.enter-key, .kb-key.backspace-key { width: 48px; }
+      .kb-key.tab-key, .kb-key.caps-key { width: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="app-navbar">
+    <a href="index.html" class="app-navbar-logo">type<span>Code</span></a>
+    <div class="app-navbar-nav">
+      <a href="typing.html" class="nav-link">⌨ Typing</a>
+      <a href="code-typing.html" class="nav-link">&lt;/&gt; Code</a>
+      <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
+      <a href="leaderboard.html" class="nav-link">🏆 Leaderboard</a>
+    </div>
+    <div class="app-navbar-actions">
+      <button class="theme-toggle" aria-label="Toggle theme">☀️</button>
+      <div class="nav-guest-actions" style="display:flex;gap:0.5rem;">
+        <a href="login.html" class="btn btn-ghost btn-sm">Sign In</a>
+      </div>
+      <div class="nav-user-actions" style="display:none;align-items:center;gap:0.75rem;">
+        <a href="profile.html" class="user-avatar" title="Profile">U</a>
+      </div>
+      <button class="mobile-menu-btn" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+
+  <div class="page">
+    <div class="page-content">
+
+      <div class="page-header">
+        <h1 class="page-title">📈 Progress & History</h1>
+        <p class="page-subtitle">Track your improvement and identify weak areas.</p>
+      </div>
+
+      <!-- Keyboard Heatmap -->
+      <div class="card" style="margin-bottom:var(--space-6);">
+        <div class="card-header">
+          <h3 class="card-title">🔥 Keyboard Heatmap — Error Frequency</h3>
+        </div>
+        <div class="keyboard-heatmap" id="keyboard-heatmap">
+          <!-- Row 1: Number row -->
+          <div class="kb-row">
+            <div class="kb-key" data-key="`">`</div>
+            <div class="kb-key" data-key="1">1</div>
+            <div class="kb-key" data-key="2">2</div>
+            <div class="kb-key" data-key="3">3</div>
+            <div class="kb-key" data-key="4">4</div>
+            <div class="kb-key" data-key="5">5</div>
+            <div class="kb-key" data-key="6">6</div>
+            <div class="kb-key" data-key="7">7</div>
+            <div class="kb-key" data-key="8">8</div>
+            <div class="kb-key" data-key="9">9</div>
+            <div class="kb-key" data-key="0">0</div>
+            <div class="kb-key" data-key="-">-</div>
+            <div class="kb-key" data-key="=">=</div>
+            <div class="kb-key backspace-key" data-key="Backspace">⌫</div>
+          </div>
+          <!-- Row 2: QWERTY -->
+          <div class="kb-row">
+            <div class="kb-key tab-key" data-key="Tab">Tab</div>
+            <div class="kb-key" data-key="q">Q</div>
+            <div class="kb-key" data-key="w">W</div>
+            <div class="kb-key" data-key="e">E</div>
+            <div class="kb-key" data-key="r">R</div>
+            <div class="kb-key" data-key="t">T</div>
+            <div class="kb-key" data-key="y">Y</div>
+            <div class="kb-key" data-key="u">U</div>
+            <div class="kb-key" data-key="i">I</div>
+            <div class="kb-key" data-key="o">O</div>
+            <div class="kb-key" data-key="p">P</div>
+            <div class="kb-key" data-key="[">[</div>
+            <div class="kb-key" data-key="]">]</div>
+            <div class="kb-key" data-key="\">\</div>
+          </div>
+          <!-- Row 3: ASDF -->
+          <div class="kb-row">
+            <div class="kb-key caps-key" data-key="CapsLock">Caps</div>
+            <div class="kb-key" data-key="a">A</div>
+            <div class="kb-key" data-key="s">S</div>
+            <div class="kb-key" data-key="d">D</div>
+            <div class="kb-key" data-key="f">F</div>
+            <div class="kb-key" data-key="g">G</div>
+            <div class="kb-key" data-key="h">H</div>
+            <div class="kb-key" data-key="j">J</div>
+            <div class="kb-key" data-key="k">K</div>
+            <div class="kb-key" data-key="l">L</div>
+            <div class="kb-key" data-key=";">;</div>
+            <div class="kb-key" data-key="'">'</div>
+            <div class="kb-key enter-key" data-key="Enter">Enter</div>
+          </div>
+          <!-- Row 4: ZXCV -->
+          <div class="kb-row">
+            <div class="kb-key shift" data-key="Shift">Shift</div>
+            <div class="kb-key" data-key="z">Z</div>
+            <div class="kb-key" data-key="x">X</div>
+            <div class="kb-key" data-key="c">C</div>
+            <div class="kb-key" data-key="v">V</div>
+            <div class="kb-key" data-key="b">B</div>
+            <div class="kb-key" data-key="n">N</div>
+            <div class="kb-key" data-key="m">M</div>
+            <div class="kb-key" data-key=",">,</div>
+            <div class="kb-key" data-key=".">.</div>
+            <div class="kb-key" data-key="/">/</div>
+            <div class="kb-key shift" data-key="Shift">Shift</div>
+          </div>
+          <!-- Row 5: Space -->
+          <div class="kb-row">
+            <div class="kb-key space" data-key=" ">Space</div>
+          </div>
+        </div>
+        <div class="heatmap-legend">
+          <div class="legend-item"><div class="legend-swatch" style="background:rgba(0,184,148,0.2);"></div> Low errors</div>
+          <div class="legend-item"><div class="legend-swatch" style="background:rgba(253,203,110,0.25);"></div> Medium</div>
+          <div class="legend-item"><div class="legend-swatch" style="background:rgba(255,107,107,0.3);"></div> High errors</div>
+        </div>
+      </div>
+
+      <!-- Test History Table -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">📋 Test History</h3>
+        </div>
+        <div class="table-wrapper">
+          <table class="data-table history-table">
+            <thead>
+              <tr>
+                <th>Mode</th>
+                <th>WPM</th>
+                <th>Accuracy</th>
+                <th>Errors</th>
+                <th>Duration</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="history-body">
+              <tr>
+                <td colspan="6">
+                  <div class="empty-state" style="padding:var(--space-8) 0;">
+                    <div class="empty-state-icon">📝</div>
+                    <div class="empty-state-title">No tests yet</div>
+                    <div class="empty-state-text">Complete typing tests to see your history.</div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination" id="history-pagination"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <p>Built with precision. &copy; 2026 typeCode</p>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/progress.js"></script>
+</body>
+</html>

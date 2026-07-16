@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Typing — typeCode</title>
+  <meta name="description" content="Practice typing real code in Python, JavaScript, Java, C++ and more.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/typing.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="app-navbar">
+    <a href="index.html" class="app-navbar-logo">type<span>Code</span></a>
+    <div class="app-navbar-nav">
+      <a href="typing.html" class="nav-link">⌨ Typing</a>
+      <a href="code-typing.html" class="nav-link active">&lt;/&gt; Code</a>
+      <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
+      <a href="leaderboard.html" class="nav-link">🏆 Leaderboard</a>
+    </div>
+    <div class="app-navbar-actions">
+      <button class="theme-toggle" aria-label="Toggle theme">☀️</button>
+      <div class="nav-guest-actions" style="display:flex;gap:0.5rem;">
+        <a href="login.html" class="btn btn-ghost btn-sm">Sign In</a>
+        <a href="register.html" class="btn btn-primary btn-sm">Sign Up</a>
+      </div>
+      <div class="nav-user-actions" style="display:none;align-items:center;gap:0.75rem;">
+        <a href="profile.html" class="user-avatar" title="Profile">U</a>
+      </div>
+      <button class="mobile-menu-btn" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="page">
+    <div class="page-content page-content-md">
+
+      <div class="page-header text-center">
+        <h1 class="page-title">&lt;Code/&gt; Typing</h1>
+        <p class="page-subtitle">Practice typing real code. Master brackets, semicolons, and syntax.</p>
+      </div>
+
+      <!-- Language Selector -->
+      <div class="typing-config">
+        <div class="config-group">
+          <span class="config-label">Language</span>
+          <div class="language-selector" id="language-selector">
+            <button class="lang-btn active" data-language="python">Python</button>
+            <button class="lang-btn" data-language="javascript">JavaScript</button>
+            <button class="lang-btn" data-language="java">Java</button>
+            <button class="lang-btn" data-language="c">C</button>
+            <button class="lang-btn" data-language="cpp">C++</button>
+            <button class="lang-btn" data-language="html">HTML</button>
+            <button class="lang-btn" data-language="css">CSS</button>
+            <button class="lang-btn" data-language="sql">SQL</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="typing-config">
+        <div class="config-group">
+          <span class="config-label">Level</span>
+          <div class="tabs" id="code-difficulty-tabs">
+            <button class="tab" data-difficulty="beginner">Beginner</button>
+            <button class="tab active" data-difficulty="intermediate">Medium</button>
+            <button class="tab" data-difficulty="advanced">Hard</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Code snippet title -->
+      <div class="text-center" style="margin-bottom:var(--space-4);">
+        <span class="badge badge-accent" id="snippet-title">Python — Beginner</span>
+      </div>
+
+      <!-- Typing Area -->
+      <div class="typing-area" id="typing-area">
+        <input type="text" class="typing-input" id="typing-input"
+               autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+        <div class="text-display code-text-display" id="text-display">
+          <span class="typing-focus-hint">Click here or start typing...</span>
+        </div>
+        <div class="typing-progress">
+          <div class="typing-progress-bar" id="progress-bar"></div>
+        </div>
+      </div>
+
+      <!-- Live Stats -->
+      <div class="stats-bar">
+        <div class="stats-item">
+          <span class="stats-value" id="wpm-value">0</span>
+          <span class="stats-label">WPM</span>
+        </div>
+        <div class="stats-item">
+          <span class="stats-value" id="accuracy-value">100%</span>
+          <span class="stats-label">Accuracy</span>
+        </div>
+        <div class="stats-item">
+          <span class="stats-value" id="error-value">0</span>
+          <span class="stats-label">Errors</span>
+        </div>
+        <div class="stats-item">
+          <span class="stats-value" id="cpm-value">0</span>
+          <span class="stats-label">CPM</span>
+        </div>
+        <div class="stats-item">
+          <span class="stats-value" id="timer-value">∞</span>
+          <span class="stats-label">Time</span>
+        </div>
+      </div>
+
+      <div class="typing-actions">
+        <button class="btn btn-secondary" id="restart-btn">🔄 Restart</button>
+        <button class="btn btn-ghost" id="new-snippet-btn">📝 New Snippet</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Result Overlay -->
+  <div class="result-overlay" id="result-overlay">
+    <div class="result-card">
+      <button class="result-close-btn" id="result-close-btn" aria-label="Close">&times;</button>
+      <div class="result-header">
+        <h2 class="result-title">Code Complete! 💻</h2>
+        <p class="result-subtitle">Here's your coding speed</p>
+      </div>
+      <div class="result-wpm-hero">
+        <div class="result-wpm-value" id="result-wpm">0</div>
+        <div class="result-wpm-label">Words Per Minute</div>
+      </div>
+      <div class="result-stats-grid">
+        <div class="result-stat">
+          <div class="result-stat-value" id="result-net-wpm">0</div>
+          <div class="result-stat-label">Net WPM</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat-value" id="result-accuracy">0%</div>
+          <div class="result-stat-label">Accuracy</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat-value" id="result-cpm">0</div>
+          <div class="result-stat-label">CPM</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat-value" id="result-consistency">0%</div>
+          <div class="result-stat-label">Consistency</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat-value" id="result-correct">0</div>
+          <div class="result-stat-label">Correct</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat-value" id="result-incorrect">0</div>
+          <div class="result-stat-label">Errors</div>
+        </div>
+      </div>
+      <div class="result-errors-section">
+        <div class="result-section-title">🔑 Keys to Practice</div>
+        <div class="error-keys-grid" id="result-error-keys"></div>
+      </div>
+      <div class="result-actions">
+        <button class="btn btn-primary" id="result-restart-btn">🔄 Try Again</button>
+        <button class="btn btn-secondary" id="result-new-btn">📝 New Snippet</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/typing-engine.js"></script>
+  <script src="js/code-typing.js"></script>
+</body>
+</html>

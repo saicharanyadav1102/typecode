@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — typeCode</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="app-navbar">
+    <a href="index.html" class="app-navbar-logo">type<span>Code</span></a>
+    <div class="app-navbar-nav">
+      <a href="typing.html" class="nav-link">⌨ Typing</a>
+      <a href="code-typing.html" class="nav-link">&lt;/&gt; Code</a>
+      <a href="dashboard.html" class="nav-link active">📊 Dashboard</a>
+      <a href="leaderboard.html" class="nav-link">🏆 Leaderboard</a>
+    </div>
+    <div class="app-navbar-actions">
+      <button class="theme-toggle" aria-label="Toggle theme">☀️</button>
+      <div class="nav-guest-actions" style="display:flex;gap:0.5rem;">
+        <a href="login.html" class="btn btn-ghost btn-sm">Sign In</a>
+        <a href="register.html" class="btn btn-primary btn-sm">Sign Up</a>
+      </div>
+      <div class="nav-user-actions" style="display:none;align-items:center;gap:0.75rem;">
+        <a href="profile.html" class="user-avatar" title="Profile">U</a>
+      </div>
+      <button class="mobile-menu-btn" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="page">
+    <div class="page-content">
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1 class="page-title">Dashboard</h1>
+        <p class="page-subtitle">Welcome back! Here's your typing overview.</p>
+      </div>
+
+      <!-- Stat Cards -->
+      <div class="dashboard-stats">
+        <div class="card stat-card">
+          <div class="stat-value" id="dash-avg-wpm">—</div>
+          <div class="stat-label">Avg WPM</div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-value" id="dash-best-wpm">—</div>
+          <div class="stat-label">Best WPM</div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-value" id="dash-avg-accuracy">—</div>
+          <div class="stat-label">Avg Accuracy</div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-value" id="dash-tests-taken">0</div>
+          <div class="stat-label">Tests Taken</div>
+        </div>
+      </div>
+
+      <!-- Main Grid -->
+      <div class="dashboard-main">
+
+        <!-- Left: Recent Tests + Quick Actions -->
+        <div class="dashboard-left">
+
+          <!-- Quick Start -->
+          <div class="card" style="margin-bottom:var(--space-6);">
+            <div class="card-header">
+              <h3 class="card-title">Quick Start</h3>
+            </div>
+            <div class="quick-actions">
+              <a href="typing.html" class="quick-action-card">
+                <span class="qa-icon">⌨️</span>
+                <span class="qa-label">Normal Typing</span>
+                <span class="qa-desc">Practice with English text</span>
+              </a>
+              <a href="code-typing.html" class="quick-action-card">
+                <span class="qa-icon">💻</span>
+                <span class="qa-label">Code Typing</span>
+                <span class="qa-desc">Practice with real code</span>
+              </a>
+              <a href="progress.html" class="quick-action-card">
+                <span class="qa-icon">📈</span>
+                <span class="qa-label">View Progress</span>
+                <span class="qa-desc">See your improvement</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Recent Results -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Recent Tests</h3>
+              <a href="progress.html" class="btn btn-ghost btn-sm">View All →</a>
+            </div>
+            <div id="recent-tests">
+              <div class="empty-state" style="padding:var(--space-8) 0;">
+                <div class="empty-state-icon">📝</div>
+                <div class="empty-state-title">No tests yet</div>
+                <div class="empty-state-text">Take your first typing test to see results here.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Weak Keys + Tips -->
+        <div class="dashboard-right">
+
+          <!-- Weak Keys Summary -->
+          <div class="card" style="margin-bottom:var(--space-6);">
+            <div class="card-header">
+              <h3 class="card-title">🔑 Weak Keys</h3>
+            </div>
+            <div id="weak-keys-summary">
+              <p class="text-muted" style="font-size:var(--font-size-sm);">
+                Take a few tests to reveal your weak keys.
+              </p>
+            </div>
+          </div>
+
+          <!-- Tips -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">💡 Tips</h3>
+            </div>
+            <div class="tips-list">
+              <div class="tip-item">
+                <span class="tip-icon">🎯</span>
+                <span>Focus on accuracy first, speed will follow naturally.</span>
+              </div>
+              <div class="tip-item">
+                <span class="tip-icon">⌨️</span>
+                <span>Use all fingers and maintain proper hand position.</span>
+              </div>
+              <div class="tip-item">
+                <span class="tip-icon">📊</span>
+                <span>Practice your weak keys daily for faster improvement.</span>
+              </div>
+              <div class="tip-item">
+                <span class="tip-icon">🔄</span>
+                <span>Consistency matters more than individual test scores.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <p>Built with precision. &copy; 2026 typeCode</p>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

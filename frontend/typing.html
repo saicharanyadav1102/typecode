@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typing Practice — typeCode</title>
+  <meta name="description" content="Practice typing with typeCode. Improve your WPM, accuracy, and consistency.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/typing.css">
+</head>
+<body>
+
+  <!-- ============================== -->
+  <!-- NAVBAR                         -->
+  <!-- ============================== -->
+  <nav class="app-navbar">
+    <a href="index.html" class="app-navbar-logo">type<span>Code</span></a>
+
+    <div class="app-navbar-nav">
+      <a href="typing.html" class="nav-link active">⌨ Typing</a>
+      <a href="code-typing.html" class="nav-link">&lt;/&gt; Code</a>
+      <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
+      <a href="leaderboard.html" class="nav-link">🏆 Leaderboard</a>
+    </div>
+
+    <div class="app-navbar-actions">
+      <button class="theme-toggle" aria-label="Toggle theme">☀️</button>
+
+      <!-- Guest actions -->
+      <div class="nav-guest-actions" style="display:flex;gap:0.5rem;">
+        <a href="login.html" class="btn btn-ghost btn-sm">Sign In</a>
+        <a href="register.html" class="btn btn-primary btn-sm">Sign Up</a>
+      </div>
+
+      <!-- User actions (hidden by default) -->
+      <div class="nav-user-actions" style="display:none;align-items:center;gap:0.75rem;">
+        <a href="profile.html" class="user-avatar" title="Profile">U</a>
+        <div class="dropdown">
+          <div class="dropdown-menu user-dropdown">
+            <a href="profile.html" class="dropdown-item">👤 Profile</a>
+            <a href="progress.html" class="dropdown-item">📈 Progress</a>
+            <a href="#" class="dropdown-item" id="logout-btn">🚪 Logout</a>
+          </div>
+        </div>
+      </div>
+
+      <button class="mobile-menu-btn" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- ============================== -->
+  <!-- MAIN CONTENT                   -->
+  <!-- ============================== -->
+  <div class="page">
+    <div class="page-content page-content-md">
+
+      <!-- Page Header -->
+      <div class="page-header text-center">
+        <h1 class="page-title">Typing Practice</h1>
+        <p class="page-subtitle">Focus, type, and improve your speed.</p>
+      </div>
+
+      <!-- Config Bar: Duration + Difficulty -->
+      <div class="typing-config">
+        <div class="config-group">
+          <span class="config-label">Duration</span>
+          <div class="tabs" id="duration-tabs">
+            <button class="tab" data-duration="15">15s</button>
+            <button class="tab" data-duration="30">30s</button>
+            <button class="tab active" data-duration="60">60s</button>
+            <button class="tab" data-duration="120">2m</button>
+            <button class="tab" data-duration="300">5m</button>
+          </div>
+        </div>
+
+        <div class="config-group">
+          <span class="config-label">Level</span>
+          <div class="tabs" id="difficulty-tabs">
+            <button class="tab" data-difficulty="beginner">Beginner</button>
+            <button class="tab active" data-difficulty="intermediate">Medium</button>
+            <button class="tab" data-difficulty="advanced">Hard</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Typing Area -->
+      <div class="typing-area" id="typing-area">
+        <!-- Hidden input to capture keystrokes -->
+        <input type="text" class="typing-input" id="typing-input"
+               autocomplete="off" autocorrect="off" autocapitalize="off"
+               spellcheck="false" aria-label="Type here">
+
+        <!-- Text display (characters rendered here) -->
+        <div class="text-display" id="text-display">
+          <span class="typing-focus-hint">Click here or start typing...</span>
+        </div>
+
+        <!-- Progress bar -->
+        <div class="typing-progress">
+          <div class="typing-progress-bar" id="progress-bar"></div>
+        </div>
+      </div>
+
+      <!-- Live Stats Bar -->
+      <div class="stats-bar">
+        <div class="stats-item">
+          <span class="stats-value" id="wpm-value">0</span>
+          <span class="stats-label">WPM</span>
+        </div>
+        <div class="stats-item">
+          <span class="stats-value" id="cpm-value">0</span>
+          <span class="stats-label">CPM</span>
+        </div>
+        <div class="stats-item">
+          <span class="stats-value" id="accuracy-value">100%</span>
+          <span class="stats-label">Accuracy</span>
+        </div>
+        <div class="stats-item">
+          <span class="stats-value" id="error-value">0</span>
+          <span class="stats-label">Errors</span>
+        </div>
+        <div class="stats-item">
+          <span class="stats-value" id="timer-value">1:00</span>
+          <span class="stats-label">Time</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="typing-actions">
+        <button class="btn btn-secondary" id="restart-btn">🔄 Restart</button>
+        <button class="btn btn-ghost" id="new-text-btn">📝 New Text</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================== -->
+  <!-- RESULT OVERLAY                 -->
+  <!-- ============================== -->
+  <div class="result-overlay" id="result-overlay">
+    <div class="result-card">
+      <button class="result-close-btn" id="result-close-btn" aria-label="Close">&times;</button>
+      <div class="result-header">
+        <h2 class="result-title">Test Complete! 🎉</h2>
+        <p class="result-subtitle">Here's how you performed</p>
+      </div>
+
+      <!-- Large WPM Display -->
+      <div class="result-wpm-hero">
+        <div class="result-wpm-value" id="result-wpm">0</div>
+        <div class="result-wpm-label">Words Per Minute</div>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="result-stats-grid">
+        <div class="result-stat">
+          <div class="result-stat-value" id="result-net-wpm">0</div>
+          <div class="result-stat-label">Net WPM</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat-value" id="result-accuracy">0%</div>
+          <div class="result-stat-label">Accuracy</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat-value" id="result-cpm">0</div>
+          <div class="result-stat-label">CPM</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat-value" id="result-consistency">0%</div>
+          <div class="result-stat-label">Consistency</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat-value" id="result-correct">0</div>
+          <div class="result-stat-label">Correct</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat-value" id="result-incorrect">0</div>
+          <div class="result-stat-label">Errors</div>
+        </div>
+        <div class="result-stat" style="grid-column: span 2;">
+          <div class="result-stat-value" id="result-time">0:00</div>
+          <div class="result-stat-label">Time Taken</div>
+        </div>
+      </div>
+
+      <!-- Weak Keys -->
+      <div class="result-errors-section">
+        <div class="result-section-title">🔑 Keys to Practice</div>
+        <div class="error-keys-grid" id="result-error-keys"></div>
+      </div>
+
+      <!-- Actions -->
+      <div class="result-actions">
+        <button class="btn btn-primary" id="result-restart-btn">🔄 Try Again</button>
+        <button class="btn btn-secondary" id="result-new-btn">📝 New Text</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/typing-engine.js"></script>
+  <script>
+    /* ============================================
+       TYPING PAGE CONTROLLER
+       Connects the UI controls to the TypingEngine
+       ============================================ */
+    (function () {
+      'use strict';
+
+      var selectedDuration = 60;
+      var selectedDifficulty = 'intermediate';
+      var testLoadId = 0;
+
+      // ---- Initialize the typing engine ----
+      async function initTest() {
+        var loadId = ++testLoadId;
+        var text = null;
+
+        try {
+          if (typeof API !== 'undefined') {
+            var data = await API.getTexts({ difficulty: selectedDifficulty });
+            if (loadId !== testLoadId) return;
+            if (data && data.content) text = data.content;
+          }
+        } catch (e) {
+          console.log('Typing: using local fallback text');
+        }
+
+        if (loadId !== testLoadId) return;
+
+        TypingEngine.init({
+          text: text,
+          duration: selectedDuration,
+          difficulty: selectedDifficulty,
+          mode: 'normal',
+        });
+
+        // Focus the input
+        var input = document.getElementById('typing-input');
+        if (input) input.focus();
+
+        // Mark area as active
+        document.getElementById('typing-area').classList.add('active');
+      }
+
+      // ---- Duration tabs ----
+      document.querySelectorAll('#duration-tabs .tab').forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          document.querySelectorAll('#duration-tabs .tab').forEach(function (t) {
+            t.classList.remove('active');
+          });
+          tab.classList.add('active');
+          selectedDuration = parseInt(tab.dataset.duration);
+          initTest();
+        });
+      });
+
+      // ---- Difficulty tabs ----
+      document.querySelectorAll('#difficulty-tabs .tab').forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          document.querySelectorAll('#difficulty-tabs .tab').forEach(function (t) {
+            t.classList.remove('active');
+          });
+          tab.classList.add('active');
+          selectedDifficulty = tab.dataset.difficulty;
+          initTest();
+        });
+      });
+
+      // ---- Restart / New Text buttons ----
+      document.getElementById('restart-btn').addEventListener('click', function () {
+        TypingEngine.restart();
+        document.getElementById('typing-input').focus();
+      });
+
+      document.getElementById('new-text-btn').addEventListener('click', function () {
+        initTest();
+      });
+
+      // ---- Result overlay buttons ----
+      document.getElementById('result-restart-btn').addEventListener('click', function () {
+        TypingEngine.restart();
+        document.getElementById('typing-input').focus();
+      });
+
+      document.getElementById('result-new-btn').addEventListener('click', function () {
+        initTest();
+      });
+
+      document.getElementById('result-close-btn').addEventListener('click', function () {
+        document.getElementById('result-overlay').classList.remove('active');
+        document.getElementById('typing-input').focus();
+      });
+
+      // ---- Click on text area to focus input ----
+      document.getElementById('text-display').addEventListener('click', function () {
+        var input = document.getElementById('typing-input');
+        input.focus();
+        document.getElementById('typing-area').classList.add('active');
+      });
+
+      // ---- Focus / blur indicators ----
+      var input = document.getElementById('typing-input');
+      input.addEventListener('focus', function () {
+        document.getElementById('typing-area').classList.add('active');
+      });
+      input.addEventListener('blur', function () {
+        document.getElementById('typing-area').classList.remove('active');
+      });
+
+      // ---- Keyboard shortcut: Tab to restart ----
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          TypingEngine.restart();
+          document.getElementById('typing-input').focus();
+        }
+      });
+
+      // ---- Init on load ----
+      initTest();
+    })();
+  </script>
+</body>
+</html>

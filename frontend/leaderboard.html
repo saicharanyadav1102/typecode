@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaderboard — typeCode</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="app-navbar">
+    <a href="index.html" class="app-navbar-logo">type<span>Code</span></a>
+    <div class="app-navbar-nav">
+      <a href="typing.html" class="nav-link">⌨ Typing</a>
+      <a href="code-typing.html" class="nav-link">&lt;/&gt; Code</a>
+      <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
+      <a href="leaderboard.html" class="nav-link active">🏆 Leaderboard</a>
+    </div>
+    <div class="app-navbar-actions">
+      <button class="theme-toggle" aria-label="Toggle theme">☀️</button>
+      <div class="nav-guest-actions" style="display:flex;gap:0.5rem;">
+        <a href="login.html" class="btn btn-ghost btn-sm">Sign In</a>
+        <a href="register.html" class="btn btn-primary btn-sm">Sign Up</a>
+      </div>
+      <div class="nav-user-actions" style="display:none;align-items:center;gap:0.75rem;">
+        <a href="profile.html" class="user-avatar" title="Profile">U</a>
+      </div>
+      <button class="mobile-menu-btn" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="page">
+    <div class="page-content page-content-md">
+
+      <div class="page-header text-center">
+        <h1 class="page-title">🏆 Leaderboard</h1>
+        <p class="page-subtitle">See how you rank against other typists.</p>
+      </div>
+
+      <!-- Filters -->
+      <div class="typing-config" style="margin-bottom:var(--space-6);">
+        <div class="config-group">
+          <span class="config-label">Mode</span>
+          <div class="tabs" id="lb-mode-tabs">
+            <button class="tab active" data-mode="normal">Normal</button>
+            <button class="tab" data-mode="programmer">Code</button>
+          </div>
+        </div>
+        <div class="config-group">
+          <span class="config-label">Duration</span>
+          <div class="tabs" id="lb-duration-tabs">
+            <button class="tab" data-duration="15">15s</button>
+            <button class="tab" data-duration="30">30s</button>
+            <button class="tab active" data-duration="60">60s</button>
+            <button class="tab" data-duration="120">2m</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leaderboard Table -->
+      <div class="card">
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width:60px;">#</th>
+                <th>User</th>
+                <th>WPM</th>
+                <th>Accuracy</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboard-body">
+              <!-- Sample data (will be replaced by API data) -->
+              <tr>
+                <td><span class="badge badge-warning">🥇 1</span></td>
+                <td style="font-weight:600;color:var(--text-primary);">speedTyper</td>
+                <td style="font-family:var(--font-mono);font-weight:700;color:var(--accent-light);">142</td>
+                <td>98.5%</td>
+                <td>Today</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-info">🥈 2</span></td>
+                <td style="font-weight:600;color:var(--text-primary);">codeNinja</td>
+                <td style="font-family:var(--font-mono);font-weight:700;color:var(--accent-light);">128</td>
+                <td>97.2%</td>
+                <td>Today</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-accent">🥉 3</span></td>
+                <td style="font-weight:600;color:var(--text-primary);">keyMaster</td>
+                <td style="font-family:var(--font-mono);font-weight:700;color:var(--accent-light);">115</td>
+                <td>96.8%</td>
+                <td>Yesterday</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td style="font-weight:600;color:var(--text-primary);">devPro</td>
+                <td style="font-family:var(--font-mono);font-weight:700;">102</td>
+                <td>95.3%</td>
+                <td>2 days ago</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td style="font-weight:600;color:var(--text-primary);">typingRookie</td>
+                <td style="font-family:var(--font-mono);font-weight:700;">89</td>
+                <td>93.1%</td>
+                <td>3 days ago</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination" id="leaderboard-pagination">
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <p>Built with precision. &copy; 2026 typeCode</p>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/leaderboard.js"></script>
+</body>
+</html>

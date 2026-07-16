@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register — typeCode</title>
+  <meta name="description" content="Create your typeCode account and start improving your typing speed and coding accuracy.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+</head>
+<body>
+
+  <div class="auth-page">
+    <div class="auth-card">
+      <!-- Logo -->
+      <div class="auth-logo">
+        <a href="index.html" style="text-decoration:none;color:inherit;">type<span>Code</span></a>
+      </div>
+      <p class="auth-subtitle">Create your account and start typing.</p>
+
+      <!-- Register Form -->
+      <form id="register-form" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="reg-username">Username</label>
+          <input class="form-input" type="text" id="reg-username"
+                 placeholder="codingmaster" autocomplete="username" required>
+          <span class="form-error">Username must be at least 3 characters</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="reg-email">Email</label>
+          <input class="form-input" type="email" id="reg-email"
+                 placeholder="name@gmail.com" autocomplete="email" required>
+          <span class="form-error">Please enter a valid email address</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="reg-password">Password</label>
+          <div class="password-field">
+            <input class="form-input" type="password" id="reg-password"
+                   placeholder="6+ chars, A-Z, 0-9, symbol" autocomplete="new-password" required>
+            <button type="button" class="password-toggle" aria-label="Toggle password">👁</button>
+          </div>
+          <span class="form-error">Password must include 6+ characters, uppercase, digit, and special character</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="reg-confirm">Confirm Password</label>
+          <div class="password-field">
+            <input class="form-input" type="password" id="reg-confirm"
+                   placeholder="Repeat your password" autocomplete="new-password" required>
+            <button type="button" class="password-toggle" aria-label="Toggle password">👁</button>
+          </div>
+          <span class="form-error">Passwords do not match</span>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full btn-lg" id="reg-submit">
+          Create Account
+        </button>
+      </form>
+
+      <!-- Footer -->
+      <div class="auth-footer">
+        Already have an account? <a href="login.html">Sign in</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>
