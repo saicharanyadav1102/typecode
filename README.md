@@ -16,7 +16,7 @@
 
 ## 🛠 Tech Stack
 
-- **Frontend**: Vanilla HTML5, CSS3, JavaScript (Google Fonts: *Inconsolata* & *Inter*)
+- **Frontend**:  HTML5, CSS3, JavaScript (Google Fonts: *Inconsolata* & *Inter*)
 - **Backend**: Python 3, Flask, SQLAlchemy, JWT Extended, PyMySQL
 - **Database**: MySQL
 
