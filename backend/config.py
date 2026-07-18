@@ -76,10 +76,7 @@ class Config:
     JWT_HEADER_TYPE = 'Bearer'
 
     # CORS
-    CORS_ORIGINS = parse_csv_env('CORS_ORIGINS', [
-        'http://localhost:8080',
-        'http://127.0.0.1:8080',
-    ])
+    CORS_ORIGINS = parse_csv_env('CORS_ORIGINS', ['*'])
 
 
 class DevelopmentConfig(Config):

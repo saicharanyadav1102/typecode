@@ -7,7 +7,9 @@ const API = (function () {
   'use strict';
 
   // ---- Configuration ----
-  const BASE_URL = 'http://127.0.0.1:5000/api';
+  const BASE_URL = (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost')
+    ? 'http://127.0.0.1:5000/api'
+    : 'https://typecode.onrender.com/api';
 
   // ---- Token Management ----
   function getAccessToken() {
