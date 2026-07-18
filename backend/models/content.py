@@ -11,7 +11,7 @@ class TextContent(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     content = db.Column(db.Text, nullable=False)
-    difficulty = db.Column(db.Enum('beginner', 'intermediate', 'advanced'), nullable=False, index=True)
+    difficulty = db.Column(db.Enum('beginner', 'intermediate', 'advanced', name='content_difficulty_enum'), nullable=False, index=True)
     word_count = db.Column(db.Integer, nullable=False)
     category = db.Column(db.String(100), default='general', index=True)
     is_active = db.Column(db.Boolean, default=True)
@@ -38,10 +38,10 @@ class CodeSnippet(db.Model):
     title = db.Column(db.String(200), nullable=False)
     content = db.Column(db.Text, nullable=False)
     language = db.Column(
-        db.Enum('python', 'javascript', 'java', 'c', 'cpp', 'html', 'css', 'sql'),
+        db.Enum('python', 'javascript', 'java', 'c', 'cpp', 'html', 'css', 'sql', name='code_language_enum'),
         nullable=False, index=True
     )
-    difficulty = db.Column(db.Enum('beginner', 'intermediate', 'advanced'), nullable=False)
+    difficulty = db.Column(db.Enum('beginner', 'intermediate', 'advanced', name='code_difficulty_enum'), nullable=False)
     description = db.Column(db.Text, nullable=True)
     is_active = db.Column(db.Boolean, default=True)
     created_by = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='SET NULL'), nullable=True)

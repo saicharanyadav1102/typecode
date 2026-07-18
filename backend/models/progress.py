@@ -41,7 +41,7 @@ class UserProgress(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
-    test_mode = db.Column(db.Enum('normal', 'programmer'), nullable=False)
+    test_mode = db.Column(db.Enum('normal', 'programmer', name='progress_test_mode_enum'), nullable=False)
     avg_wpm = db.Column(db.Numeric(6, 2), default=0)
     avg_accuracy = db.Column(db.Numeric(5, 2), default=0)
     tests_completed = db.Column(db.Integer, default=0)

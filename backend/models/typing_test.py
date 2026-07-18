@@ -11,9 +11,9 @@ class TypingResult(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
-    test_mode = db.Column(db.Enum('normal', 'programmer'), nullable=False)
+    test_mode = db.Column(db.Enum('normal', 'programmer', name='typing_result_test_mode_enum'), nullable=False)
     content_id = db.Column(db.Integer, nullable=False)
-    content_type = db.Column(db.Enum('text', 'code'), nullable=False)
+    content_type = db.Column(db.Enum('text', 'code', name='typing_result_content_type_enum'), nullable=False)
     duration_seconds = db.Column(db.Integer, nullable=False)
     wpm = db.Column(db.Numeric(6, 2), nullable=False)
     cpm = db.Column(db.Numeric(8, 2), nullable=False)
@@ -23,7 +23,7 @@ class TypingResult(db.Model):
     incorrect_chars = db.Column(db.Integer, nullable=False)
     consistency = db.Column(db.Numeric(5, 2), default=0)
     language = db.Column(db.String(20), nullable=True)
-    difficulty = db.Column(db.Enum('beginner', 'intermediate', 'advanced'), nullable=False)
+    difficulty = db.Column(db.Enum('beginner', 'intermediate', 'advanced', name='typing_result_difficulty_enum'), nullable=False)
     completed_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     # Indexes for common queries

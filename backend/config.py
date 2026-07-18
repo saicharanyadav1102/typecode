@@ -34,10 +34,29 @@ class Config:
     DB_USER = os.getenv('DB_USER', 'root')
     DB_PASSWORD = os.getenv('DB_PASSWORD', '')
 
-    SQLALCHEMY_DATABASE_URI = (
-        f"mysql+pymysql://{DB_USER}:{quote_plus(DB_PASSWORD)}"
-        f"@{DB_HOST}:{DB_PORT}/{DB_NAME}?charset=utf8mb4"
-    )
+    _db_url = os.getenv('DATABASE_URL')
+    if _db_url:
+        if _db_url.startswith("postgres://"):
+            _db_url = _db_url.replace("postgres://", "postgresql+psycopg2://", 1)
+        elif _db_url.startswith("postgresql://") and not _db_url.startswith("postgresql+"):
+            _db_url = _db_url.replace("postgresql://", "postgresql+psycopg2://", 1)
+        
+        try:
+            scheme, rest = _db_url.split("://", 1)
+            if "@" in rest:
+                user_pass, host_db = rest.rsplit("@", 1)
+                if ":" in user_pass:
+                    user, raw_password = user_pass.split(":", 1)
+                    if "@" in raw_password or "#" in raw_password or "%" in raw_password:
+                        _db_url = f"{scheme}://{user}:{quote_plus(raw_password)}@{host_db}"
+        except Exception:
+            pass
+        SQLALCHEMY_DATABASE_URI = _db_url
+    else:
+        SQLALCHEMY_DATABASE_URI = (
+            f"mysql+pymysql://{DB_USER}:{quote_plus(DB_PASSWORD)}"
+            f"@{DB_HOST}:{DB_PORT}/{DB_NAME}?charset=utf8mb4"
+        )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ENGINE_OPTIONS = {
         'pool_recycle': 3600,
