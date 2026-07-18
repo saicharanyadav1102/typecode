@@ -65,7 +65,9 @@ def create_app():
     return app
 
 
+# Create top-level app instance for WSGI / Gunicorn deployments (gunicorn app:app)
+app = create_app()
+
 # ---- Run ----
 if __name__ == '__main__':
-    app = create_app()
     app.run(host='0.0.0.0', port=5000, debug=True)
