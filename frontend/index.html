@@ -6,12 +6,13 @@
   <title>typeCode — Improve Typing Speed. Master Coding Accuracy.</title>
   <meta name="description" content="typeCode is a professional typing practice platform for programmers and everyday typists.">
 
-  <!-- Google Fonts: Inconsolata (mono) + Inter (UI) -->
+  <!-- Google Fonts: JetBrains Mono + Outfit + Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400..800;1,400..800&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/design-system.css">
   <link rel="stylesheet" href="css/intro.css">
   <link rel="stylesheet" href="css/landing.css">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -59,15 +60,15 @@
         </p>
         <div class="hero-buttons reveal-item">
           <button class="btn btn-primary" id="btn-start-typing" onclick="window.location.href='typing.html'">
-            <span class="btn-icon">⌨</span> Start Typing
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><rect x="2" y="4" width="20" height="16" rx="2.5"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M8 12h.01M12 12h.01M16 12h.01M7 16h10"/></svg> Start Typing
           </button>
           <button class="btn btn-secondary" id="btn-coding-mode" onclick="window.location.href='code-typing.html'">
-            <span class="btn-icon">&lt;/&gt;</span> Coding Mode
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> Coding Mode
           </button>
         </div>
         <div class="hero-stats reveal-item">
           <div class="stat">
-            <span class="stat-number">8</span>
+            <span class="stat-number">8+</span>
             <span class="stat-label">Languages</span>
           </div>
           <div class="stat-divider"></div>
@@ -77,8 +78,8 @@
           </div>
           <div class="stat-divider"></div>
           <div class="stat">
-            <span class="stat-number">0</span>
-            <span class="stat-label">Cost</span>
+            <span class="stat-number">0ms</span>
+            <span class="stat-label">Latency</span>
           </div>
         </div>
       </div>
@@ -87,8 +88,8 @@
       <div class="hero-decoration reveal-item">
         <div class="floating-code">
           <span class="code-line"><i class="kw">const</i> speed = <i class="fn">calculate</i>(wpm);</span>
-          <span class="code-line"><i class="kw">if</i> (accuracy &gt; <i class="num">95</i>) {</span>
-          <span class="code-line">&nbsp;&nbsp;<i class="kw">return</i> <i class="str">"excellent"</i>;</span>
+          <span class="code-line"><i class="kw">if</i> (accuracy &gt; <i class="num">98.5</i>) {</span>
+          <span class="code-line">&nbsp;&nbsp;<i class="kw">return</i> <i class="str">"master_class"</i>;</span>
           <span class="code-line">}</span>
         </div>
       </div>
@@ -98,19 +99,25 @@
     <section class="features" id="features">
       <div class="features-grid">
         <div class="feature-card reveal-item">
-          <div class="feature-icon">🎯</div>
-          <h3>Precision Tracking</h3>
-          <p>Real-time WPM, CPM, and accuracy metrics with per-key error analysis and keyboard heatmap.</p>
+          <div class="feature-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3>Precision Metrics</h3>
+          <p>Real-time WPM, CPM, and accuracy tracking with instant per-character feedback and detailed timing analytics.</p>
         </div>
         <div class="feature-card reveal-item">
-          <div class="feature-icon">💻</div>
+          <div class="feature-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
           <h3>Code Practice</h3>
-          <p>Type real code in Python, JavaScript, Java, C, C++, HTML, CSS, and SQL.</p>
+          <p>Practice with real-world snippets in Python, JavaScript, Java, C++, HTML, CSS, and SQL with proper indentation.</p>
         </div>
         <div class="feature-card reveal-item">
-          <div class="feature-icon">📊</div>
-          <h3>Smart Progress</h3>
-          <p>Track your improvement over time. Your weak keys are highlighted so you know exactly what to practice.</p>
+          <div class="feature-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+          </div>
+          <h3>Deep Heatmaps</h3>
+          <p>Analyze your keystroke speeds and identify weak fingers or slow character transitions over your history.</p>
         </div>
       </div>
     </section>

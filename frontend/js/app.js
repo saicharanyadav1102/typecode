@@ -25,7 +25,7 @@ const App = (function () {
 
   function updateThemeIcon(theme) {
     var btn = document.querySelector('.theme-toggle');
-    if (btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    if (btn) btn.innerHTML = theme === 'dark' ? '<span style="font-size:1rem; opacity:0.85;">☀️</span>' : '<span style="font-size:1rem; opacity:0.85;">🌙</span>';
   }
 
   // ============================================
@@ -102,21 +102,26 @@ const App = (function () {
       document.body.appendChild(container);
     }
 
-    var icons = { success: '✓', error: '✕', info: 'ℹ', warning: '⚠' };
+    var icons = {
+      success: '<span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,0.2);color:#10b981;font-weight:800;font-size:12px;">✓</span>',
+      error: '<span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(244,63,94,0.2);color:#f43f5e;font-weight:800;font-size:12px;">✕</span>',
+      info: '<span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(56,189,248,0.2);color:#38bdf8;font-weight:800;font-size:12px;">i</span>',
+      warning: '<span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:800;font-size:12px;">!</span>'
+    };
 
     var toast = document.createElement('div');
     toast.className = 'toast toast-' + type;
     toast.innerHTML = '<span class="toast-icon">' + (icons[type] || '') + '</span>' +
-                      '<span class="toast-msg">' + message + '</span>';
+                      '<span class="toast-msg" style="line-height:1.4;">' + message + '</span>';
 
     container.appendChild(toast);
 
     // Auto-remove after 4 seconds
     setTimeout(function () {
       toast.style.opacity = '0';
-      toast.style.transform = 'translateX(40px)';
-      toast.style.transition = 'all 0.3s ease';
-      setTimeout(function () { toast.remove(); }, 300);
+      toast.style.transform = 'translateX(50px) scale(0.92)';
+      toast.style.transition = 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)';
+      setTimeout(function () { toast.remove(); }, 350);
     }, 4000);
   }
 

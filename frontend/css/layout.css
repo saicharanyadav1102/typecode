@@ -1,39 +1,43 @@
 /* ============================================
    LAYOUT — typeCode
-   Navbar, sidebar, page layouts, responsive grid
+   Translucent Glass Navbar, Smooth Page Grid & Navigation
    ============================================ */
 
 /* ============================================
-   APP NAVBAR (shared across all pages)
+   APP NAVBAR (Shared across all pages)
    ============================================ */
 .app-navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 64px;
+  height: 68px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 var(--space-8);
   z-index: var(--z-navbar);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  background: rgba(10, 10, 15, 0.8);
-  border-bottom: 1px solid var(--border-subtle);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  background: rgba(11, 15, 25, 0.78);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
 }
 
 [data-theme="light"] .app-navbar {
-  background: rgba(245, 245, 250, 0.85);
+  background: rgba(248, 250, 252, 0.85);
 }
 
 .app-navbar-logo {
   font-family: var(--font-mono);
-  font-size: 1.35rem;
-  font-weight: 700;
+  font-size: 1.45rem;
+  font-weight: 800;
   color: var(--text-primary);
   text-decoration: none;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
 }
 
 .app-navbar-logo span {
@@ -46,30 +50,35 @@
 .app-navbar-nav {
   display: flex;
   align-items: center;
-  gap: var(--space-1);
+  gap: var(--space-2);
+  background: rgba(18, 24, 38, 0.5);
+  padding: 0.35rem 0.5rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-subtle);
 }
 
 .nav-link {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  padding: 0.5rem 1rem;
-  border-radius: var(--radius-sm);
+  padding: 0.45rem 1.15rem;
+  border-radius: var(--radius-full);
   font-size: var(--font-size-sm);
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text-secondary);
   text-decoration: none;
   transition: all var(--transition-fast);
 }
 
-.nav-link:hover,
-.nav-link.active {
+.nav-link:hover {
   color: var(--text-primary);
-  background: var(--bg-card);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .nav-link.active {
-  color: var(--accent-light);
+  color: #ffffff;
+  background: var(--accent);
+  box-shadow: 0 2px 12px var(--accent-glow);
 }
 
 .app-navbar-actions {
@@ -80,281 +89,125 @@
 
 /* Theme toggle button */
 .theme-toggle {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-sm);
-  background: transparent;
+  border-radius: var(--radius-full);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
   color: var(--text-secondary);
   cursor: pointer;
   font-size: 1.15rem;
   transition: all var(--transition-fast);
-  border: none;
 }
 
 .theme-toggle:hover {
-  background: var(--bg-card);
-  color: var(--text-primary);
+  background: var(--bg-card-hover);
+  color: var(--accent-light);
+  border-color: var(--glass-border);
+  transform: scale(1.05);
 }
 
 /* User avatar / menu trigger */
 .user-avatar {
-  width: 34px;
-  height: 34px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background: var(--accent-gradient);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: var(--font-size-sm);
-  font-weight: 700;
+  font-weight: 800;
   color: #ffffff;
   cursor: pointer;
-  transition: box-shadow var(--transition-fast);
+  transition: all var(--transition-fast);
+  box-shadow: 0 2px 12px var(--accent-glow);
 }
 
 .user-avatar:hover {
-  box-shadow: 0 0 0 3px var(--accent-glow);
+  transform: scale(1.06);
+  box-shadow: 0 0 0 4px var(--accent-glow);
 }
 
 /* Mobile hamburger */
 .mobile-menu-btn {
   display: none;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   align-items: center;
   justify-content: center;
-  background: transparent;
-  border: none;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
   color: var(--text-primary);
   font-size: 1.3rem;
   cursor: pointer;
 }
 
 /* ============================================
-   PAGE WRAPPER (content below navbar)
+   PAGE WRAPPER & BACKGROUND GRID
    ============================================ */
 .page {
-  padding-top: 64px; /* navbar height */
+  padding-top: 68px; /* navbar height */
   min-height: 100vh;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Background grid pattern */
+/* Subtle architectural grid lines */
 .page::before {
   content: '';
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   background-size: 60px 60px;
   pointer-events: none;
-  z-index: 0;
+  z-index: -1;
 }
 
-[data-theme="light"] .page::before {
-  background-image:
-    linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
-}
-
-.page-content {
-  position: relative;
-  z-index: 1;
-  padding: var(--space-8) var(--space-6);
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.page-content-sm { max-width: 640px; }
-.page-content-md { max-width: 860px; }
-.page-content-full { max-width: 100%; padding: var(--space-8); }
-
-/* Page header */
-.page-header {
-  margin-bottom: var(--space-8);
-}
-
-.page-title {
-  font-size: var(--font-size-2xl);
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: var(--line-height-tight);
-}
-
-.page-subtitle {
-  font-size: var(--font-size-base);
-  color: var(--text-secondary);
-  margin-top: var(--space-2);
-}
-
-/* ============================================
-   GRID LAYOUTS
-   ============================================ */
-.grid {
-  display: grid;
-  gap: var(--space-6);
-}
-
-.grid-2 { grid-template-columns: repeat(2, 1fr); }
-.grid-3 { grid-template-columns: repeat(3, 1fr); }
-.grid-4 { grid-template-columns: repeat(4, 1fr); }
-
-.grid-auto {
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
-
-/* ============================================
-   AUTH LAYOUT (centered card)
-   ============================================ */
-.auth-page {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: var(--space-6);
-  background:
-    radial-gradient(ellipse 60% 40% at 50% 30%, rgba(108, 92, 231, 0.06), transparent),
-    var(--bg-primary);
-}
-
-.auth-card {
-  width: 100%;
-  max-width: 420px;
-  padding: var(--space-10);
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-2xl);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-}
-
-.auth-logo {
-  font-family: var(--font-mono);
-  font-size: var(--font-size-2xl);
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: var(--space-2);
-  color: var(--text-primary);
-}
-
-.auth-logo span {
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.auth-subtitle {
-  text-align: center;
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-  margin-bottom: var(--space-8);
-}
-
-.auth-footer {
-  text-align: center;
-  margin-top: var(--space-6);
-  font-size: var(--font-size-sm);
-  color: var(--text-muted);
-}
-
-.auth-footer a {
-  color: var(--accent-light);
-  font-weight: 500;
-}
-
-.auth-divider {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  margin: var(--space-6) 0;
-  color: var(--text-muted);
-  font-size: var(--font-size-xs);
-}
-
-.auth-divider::before,
-.auth-divider::after {
+/* Radial top glow */
+.page::after {
   content: '';
+  position: fixed;
+  top: -150px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.main-content {
   flex: 1;
-  height: 1px;
-  background: var(--border-subtle);
-}
-
-/* ============================================
-   DASHBOARD GRID
-   ============================================ */
-.dashboard-stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--space-4);
-  margin-bottom: var(--space-8);
-}
-
-.dashboard-main {
-  display: grid;
-  grid-template-columns: 1fr 360px;
-  gap: var(--space-6);
+  padding: var(--space-10) 0;
 }
 
 /* ============================================
    FOOTER
    ============================================ */
 .app-footer {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  padding: var(--space-6);
+  padding: var(--space-8) 0;
   border-top: 1px solid var(--border-subtle);
-  color: var(--text-muted);
+  margin-top: auto;
+  text-align: center;
   font-size: var(--font-size-sm);
+  color: var(--text-muted);
 }
 
 /* ============================================
    RESPONSIVE BREAKPOINTS
    ============================================ */
-@media (max-width: 1024px) {
-  .dashboard-main {
-    grid-template-columns: 1fr;
-  }
-  .grid-4 { grid-template-columns: repeat(2, 1fr); }
-}
-
 @media (max-width: 768px) {
-  .app-navbar {
-    padding: 0 var(--space-4);
-  }
-
-  .app-navbar-nav {
-    display: none;
-  }
-
+  .app-navbar { padding: 0 var(--space-4); }
+  .app-navbar-nav { display: none; }
   .mobile-menu-btn { display: flex; }
-
-  /* Mobile menu overlay */
-  .app-navbar-nav.mobile-open {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 64px;
-    left: 0;
-    width: 100%;
-    background: var(--bg-secondary);
-    border-bottom: 1px solid var(--border-subtle);
-    padding: var(--space-4);
-    gap: var(--space-2);
-    z-index: var(--z-navbar);
-  }
-
-  .page-content { padding: var(--space-6) var(--space-4); }
-  .grid-2, .grid-3 { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 480px) {
-  .app-navbar { padding: 0 var(--space-3); }
-  .page-content { padding: var(--space-4) var(--space-3); }
-  .auth-card { padding: var(--space-6); }
+  .main-content { padding: var(--space-6) 0; }
 }
