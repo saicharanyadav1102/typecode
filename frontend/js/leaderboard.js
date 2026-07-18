@@ -25,15 +25,14 @@
 
     entries.forEach(function (entry, i) {
       var rank = i + 1;
-      var medal = '';
       var badgeClass = '';
-      if (rank === 1) { medal = '🥇 '; badgeClass = 'badge-warning'; }
-      else if (rank === 2) { medal = '🥈 '; badgeClass = 'badge-info'; }
-      else if (rank === 3) { medal = '🥉 '; badgeClass = 'badge-accent'; }
+      if (rank === 1) { badgeClass = 'badge-warning'; }
+      else if (rank === 2) { badgeClass = 'badge-info'; }
+      else if (rank === 3) { badgeClass = 'badge-accent'; }
 
       var tr = document.createElement('tr');
       tr.innerHTML =
-        '<td>' + (badgeClass ? '<span class="badge ' + badgeClass + '">' + medal + rank + '</span>' : rank) + '</td>' +
+        '<td>' + (badgeClass ? '<span class="badge ' + badgeClass + '">#' + rank + '</span>' : '#' + rank) + '</td>' +
         '<td style="font-weight:600;color:var(--text-primary);">' + (entry.username || 'User') + '</td>' +
         '<td style="font-family:var(--font-mono);font-weight:700;color:var(--accent-light);">' + Math.round(entry.wpm) + '</td>' +
         '<td>' + (entry.accuracy || 0).toFixed(1) + '%</td>' +

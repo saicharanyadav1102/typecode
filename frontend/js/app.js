@@ -9,8 +9,27 @@ const App = (function () {
   // ============================================
   // THEME MANAGEMENT (dark / light)
   // ============================================
+  const THEME_TOGGLE_SVGS = `
+    <!-- Moon Icon (Dark Mode) -->
+    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+    <!-- Sun Icon (Light Mode) -->
+    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  `;
+
   function initTheme() {
-    var saved = localStorage.getItem('tc_theme') || 'dark';
+    var saved = localStorage.getItem('tc_theme') || localStorage.getItem('theme') || 'dark';
     document.documentElement.setAttribute('data-theme', saved);
     updateThemeIcon(saved);
   }
@@ -20,12 +39,17 @@ const App = (function () {
     var next = current === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
     localStorage.setItem('tc_theme', next);
+    localStorage.setItem('theme', next);
     updateThemeIcon(next);
   }
 
   function updateThemeIcon(theme) {
-    var btn = document.querySelector('.theme-toggle');
-    if (btn) btn.innerHTML = theme === 'dark' ? '<span style="font-size:1rem; opacity:0.85;">☀️</span>' : '<span style="font-size:1rem; opacity:0.85;">🌙</span>';
+    document.querySelectorAll('.theme-toggle').forEach(function (btn) {
+      if (!btn.querySelector('.moon-icon') || !btn.querySelector('.sun-icon')) {
+        btn.innerHTML = THEME_TOGGLE_SVGS;
+      }
+      btn.setAttribute('aria-label', theme === 'dark' ? 'Toggle Light Mode' : 'Toggle Dark Mode');
+    });
   }
 
   // ============================================
@@ -33,8 +57,9 @@ const App = (function () {
   // ============================================
   function initNavbar() {
     // Theme toggle
-    var themeBtn = document.querySelector('.theme-toggle');
-    if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
+    document.querySelectorAll('.theme-toggle').forEach(function (themeBtn) {
+      themeBtn.addEventListener('click', toggleTheme);
+    });
 
     // Mobile menu
     var menuBtn = document.querySelector('.mobile-menu-btn');
@@ -102,26 +127,21 @@ const App = (function () {
       document.body.appendChild(container);
     }
 
-    var icons = {
-      success: '<span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,0.2);color:#10b981;font-weight:800;font-size:12px;">✓</span>',
-      error: '<span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(244,63,94,0.2);color:#f43f5e;font-weight:800;font-size:12px;">✕</span>',
-      info: '<span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(56,189,248,0.2);color:#38bdf8;font-weight:800;font-size:12px;">i</span>',
-      warning: '<span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(245,158,11,0.2);color:#f59e0b;font-weight:800;font-size:12px;">!</span>'
-    };
+    var icons = { success: '✓', error: '✕', info: 'ℹ', warning: '⚠' };
 
     var toast = document.createElement('div');
     toast.className = 'toast toast-' + type;
     toast.innerHTML = '<span class="toast-icon">' + (icons[type] || '') + '</span>' +
-                      '<span class="toast-msg" style="line-height:1.4;">' + message + '</span>';
+                      '<span class="toast-msg">' + message + '</span>';
 
     container.appendChild(toast);
 
     // Auto-remove after 4 seconds
     setTimeout(function () {
       toast.style.opacity = '0';
-      toast.style.transform = 'translateX(50px) scale(0.92)';
-      toast.style.transition = 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)';
-      setTimeout(function () { toast.remove(); }, 350);
+      toast.style.transform = 'translateX(40px)';
+      toast.style.transition = 'all 0.3s ease';
+      setTimeout(function () { toast.remove(); }, 300);
     }, 4000);
   }
 
@@ -195,11 +215,27 @@ const App = (function () {
   }
 
   // ============================================
+  // INTERACTIVE CARD MOUSE SPOTLIGHT (Editorial Blueprint)
+  // ============================================
+  function initMouseSpotlight() {
+    document.querySelectorAll('.interactive-card, .card, .feature-card, .quick-action-card, .stat-card').forEach(function (card) {
+      card.addEventListener('mousemove', function (e) {
+        var rect = card.getBoundingClientRect();
+        var x = e.clientX - rect.left;
+        var y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', x + 'px');
+        card.style.setProperty('--mouse-y', y + 'px');
+      });
+    });
+  }
+
+  // ============================================
   // INIT
   // ============================================
   function init() {
     initTheme();
     initNavbar();
+    initMouseSpotlight();
   }
 
   // Auto-init on DOM ready
@@ -220,6 +256,7 @@ const App = (function () {
     formatTime: formatTime,
     timeAgo: timeAgo,
     updateNavAuth: updateNavAuth,
+    initMouseSpotlight: initMouseSpotlight,
   };
 
 })();

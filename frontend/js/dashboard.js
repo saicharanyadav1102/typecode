@@ -140,8 +140,8 @@
       row.className = 'recent-test-row';
 
       var modeLabel = test.test_mode === 'programmer'
-        ? '💻 ' + (test.language || 'Code')
-        : '⌨️ Normal';
+        ? '[ CODE ] ' + (test.language || 'Code')
+        : '[ TYPE ] Normal';
 
       row.innerHTML =
         '<div class="recent-test-info">' +

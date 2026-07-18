@@ -1,62 +1,60 @@
 /* ============================================
    DESIGN SYSTEM — typeCode
-   Modern, Minimal, High-Contrast Typing Theme
+   Core tokens, variables, and base styles
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400..800;1,400..800&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
-
+/* --- CSS Custom Properties (Design Tokens) --- */
 :root {
-  /* ---- Colors: Premium Obsidian & Electric Cyan Theme ---- */
-  --bg-primary: #0b0f19;
-  --bg-secondary: #121826;
-  --bg-tertiary: #1b2438;
-  --bg-card: rgba(18, 24, 38, 0.65);
-  --bg-card-hover: rgba(26, 36, 56, 0.85);
-  --bg-input: rgba(15, 23, 42, 0.8);
-  --bg-input-focus: rgba(30, 41, 59, 0.9);
+  /* ---- Colors: High-Contrast Dark Grey & White Editorial (Default) ---- */
+  --bg-primary: #020617;                 /* Slate-950 */
+  --bg-secondary: #090d16;               /* Zinc-950/Slate-900 */
+  --bg-tertiary: #18181b;                /* Zinc-900 */
+  --bg-card: rgba(24, 24, 27, 0.9);      /* Zinc-900 with 90% opacity */
+  --bg-card-hover: rgba(39, 39, 42, 0.95); /* Zinc-800 hover */
+  --bg-input: rgba(24, 24, 27, 0.8);
+  --bg-input-focus: rgba(39, 39, 42, 0.9);
 
-  --glass-bg: rgba(18, 24, 38, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.12);
-  --glass-border-hover: rgba(56, 189, 248, 0.35);
-  --glass-blur: 24px;
+  --glass-bg: rgba(24, 24, 27, 0.85);
+  --glass-border: rgba(39, 39, 42, 0.8);
+  --glass-blur: 20px;
 
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-default: rgba(255, 255, 255, 0.14);
-  --border-strong: rgba(255, 255, 255, 0.22);
+  --border-subtle: rgba(39, 39, 42, 0.8); /* Zinc-800 */
+  --border-default: rgba(82, 82, 91, 0.8); /* Zinc-600 */
+  --border-strong: rgba(161, 161, 170, 0.9); /* Zinc-400 */
 
-  /* High Contrast Text */
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #475569;
-  --text-inverse: #0b0f19;
+  --text-primary: #ffffff;               /* Pure White */
+  --text-secondary: #d4d4d8;             /* Zinc-300 */
+  --text-muted: #71717a;                 /* Zinc-500 */
+  --text-inverse: #18181b;               /* Zinc-900 */
 
-  /* ---- Accent Colors ---- */
-  --accent: #38bdf8;          /* Electric Sky Cyan */
-  --accent-hover: #0ea5e9;
-  --accent-light: #7dd3fc;
-  --accent-glow: rgba(56, 189, 248, 0.25);
-  --accent-gradient: linear-gradient(135deg, #38bdf8, #818cf8);
+  /* ---- Accent Colors (Clean Editorial Highlights) ---- */
+  --accent: #ffffff;                     /* Pure White highlight for high contrast */
+  --accent-hover: #e4e4e7;               /* Zinc-200 */
+  --accent-light: #a1a1aa;               /* Zinc-400 */
+  --accent-glow: rgba(255, 255, 255, 0.15);
+  --accent-gradient: linear-gradient(135deg, #ffffff, #d4d4d8);
 
-  --teal: #10b981;            /* Emerald */
-  --teal-hover: #059669;
-  --teal-glow: rgba(16, 185, 129, 0.25);
+  --teal: #38bdf8;                       /* Sky accent */
+  --teal-hover: #0ea5e9;
+  --teal-glow: rgba(56, 189, 248, 0.15);
 
   /* ---- Semantic Colors ---- */
   --success: #10b981;
-  --success-bg: rgba(16, 185, 129, 0.12);
-  --success-border: rgba(16, 185, 129, 0.35);
+  --success-bg: rgba(16, 185, 129, 0.1);
+  --success-border: rgba(16, 185, 129, 0.3);
   --error: #f43f5e;
-  --error-bg: rgba(244, 63, 94, 0.12);
-  --error-border: rgba(244, 63, 94, 0.35);
+  --error-bg: rgba(244, 63, 94, 0.1);
+  --error-border: rgba(244, 63, 94, 0.3);
   --warning: #f59e0b;
-  --warning-bg: rgba(245, 158, 11, 0.12);
-  --warning-border: rgba(245, 158, 11, 0.35);
-  --info: #38bdf8;
-  --info-bg: rgba(56, 189, 248, 0.12);
+  --warning-bg: rgba(245, 158, 11, 0.1);
+  --warning-border: rgba(245, 158, 11, 0.3);
+  --info: #3b82f6;
+  --info-bg: rgba(59, 130, 246, 0.1);
 
-  /* ---- Typography ---- */
-  --font-display: 'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', 'Inconsolata', monospace;
+  /* ---- Typography Hierarchy ---- */
+  --font-display: 'Inter', 'Google Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-quote: 'Playfair Display', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Inconsolata', 'Courier New', monospace;
   --font-size-xs: 0.75rem;    /* 12px */
   --font-size-sm: 0.875rem;   /* 14px */
   --font-size-base: 1rem;     /* 16px */
@@ -64,13 +62,13 @@
   --font-size-lg: 1.25rem;    /* 20px */
   --font-size-xl: 1.5rem;     /* 24px */
   --font-size-2xl: 2rem;      /* 32px */
-  --font-size-3xl: 2.75rem;   /* 44px */
-  --font-size-4xl: 3.75rem;   /* 60px */
+  --font-size-3xl: 2.5rem;    /* 40px */
+  --font-size-4xl: 3.5rem;    /* 56px */
   --line-height-tight: 1.15;
   --line-height-normal: 1.6;
-  --letter-spacing-tight: -0.025em;
+  --letter-spacing-tight: -0.02em;
   --letter-spacing-normal: 0;
-  --letter-spacing-wide: 0.05em;
+  --letter-spacing-wide: 0.04em;
 
   /* ---- Spacing ---- */
   --space-1: 0.25rem;  /* 4px */
@@ -86,26 +84,26 @@
   --space-20: 5rem;    /* 80px */
 
   /* ---- Border Radius ---- */
-  --radius-xs: 6px;
+  --radius-xs: 4px;
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
-  --radius-xl: 22px;
-  --radius-2xl: 28px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
   --radius-full: 9999px;
 
   /* ---- Shadows ---- */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
-  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.35);
-  --shadow-lg: 0 12px 36px rgba(0, 0, 0, 0.45);
-  --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.6);
-  --shadow-glow-accent: 0 0 28px var(--accent-glow);
-  --shadow-glow-teal: 0 0 28px var(--teal-glow);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.5);
+  --shadow-glow-accent: 0 4px 24px var(--accent-glow);
+  --shadow-glow-teal: 0 4px 24px var(--teal-glow);
 
-  /* ---- Transitions (Spring & Smooth) ---- */
-  --transition-fast: 0.15s cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-normal: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-slow: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  /* ---- Transitions ---- */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+  --transition-slow: 0.4s ease;
 
   /* ---- Z-Index Scale ---- */
   --z-dropdown: 100;
@@ -118,38 +116,37 @@
   --z-tooltip: 800;
 }
 
-/* ---- Light Theme Overrides (Clean Slate White) ---- */
+/* ---- Light Theme Overrides (Editorial High Contrast) ---- */
 [data-theme="light"] {
-  --bg-primary: #f8fafc;
-  --bg-secondary: #ffffff;
-  --bg-tertiary: #f1f5f9;
-  --bg-card: rgba(255, 255, 255, 0.85);
-  --bg-card-hover: rgba(255, 255, 255, 1);
-  --bg-input: rgba(241, 245, 249, 0.8);
-  --bg-input-focus: rgba(255, 255, 255, 1);
+  --bg-primary: #f8fafc;                 /* Slate-50 clean canvas */
+  --bg-secondary: #f1f5f9;               /* Slate-100 */
+  --bg-tertiary: #e2e8f0;                /* Slate-200 (distinct container contrast) */
+  --bg-card: #ffffff;                    /* Pure White card */
+  --bg-card-hover: #f1f5f9;              /* Slate-100 hover */
+  --bg-input: #ffffff;
+  --bg-input-focus: #ffffff;
 
-  --glass-bg: rgba(255, 255, 255, 0.8);
-  --glass-border: rgba(15, 23, 42, 0.08);
-  --glass-border-hover: rgba(14, 165, 233, 0.35);
+  --glass-bg: rgba(255, 255, 255, 0.95);
+  --glass-border: #cbd5e1;               /* Slate-300 */
 
-  --border-subtle: rgba(15, 23, 42, 0.06);
-  --border-default: rgba(15, 23, 42, 0.12);
-  --border-strong: rgba(15, 23, 42, 0.2);
+  --border-subtle: #cbd5e1;              /* Slate-300 crisp border visibility */
+  --border-default: #94a3b8;             /* Slate-400 */
+  --border-strong: #64748b;              /* Slate-500 */
 
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
+  --text-primary: #0f172a;               /* Slate-900 (High contrast) */
+  --text-secondary: #334155;             /* Slate-700 */
+  --text-muted: #64748b;                 /* Slate-500 */
   --text-inverse: #ffffff;
 
-  --accent: #0284c7;
-  --accent-hover: #0369a1;
-  --accent-light: #0ea5e9;
-  --accent-glow: rgba(2, 132, 199, 0.18);
-  --accent-gradient: linear-gradient(135deg, #0284c7, #4f46e5);
+  --accent: #0f172a;                     /* Slate-900 button / active state */
+  --accent-hover: #1e293b;
+  --accent-light: #475569;
+  --accent-glow: rgba(15, 23, 42, 0.15);
+  --accent-gradient: linear-gradient(135deg, #0f172a, #334155);
 
-  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
-  --shadow-md: 0 6px 20px rgba(15, 23, 42, 0.06);
-  --shadow-lg: 0 12px 36px rgba(15, 23, 42, 0.08);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.12);
 }
 
 /* ============================================
@@ -176,7 +173,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
-  overflow-x: hidden;
 }
 
 a {
@@ -210,11 +206,11 @@ ul, ol { list-style: none; }
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-full);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.18);
 }
 
 /* ============================================
